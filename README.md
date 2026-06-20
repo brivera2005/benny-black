@@ -19,7 +19,7 @@ Open `http://localhost:8080` (or the port shown).
 ```bash
 npm install -g wrangler   # or use npx wrangler
 wrangler login
-npx wrangler pages deploy . --project-name=benny-black
+npx wrangler pages deploy . --project-name=bennyblack --branch=main
 ```
 
 ### Option B — GitHub integration
@@ -32,7 +32,9 @@ Custom domain (optional): add `bennyblack.com` or `music.bennyblack.com` in Page
 
 ## Tracks
 
-Official singles are listed in `js/tracks.json`. Tracks with verified local masters play from `audio/`; others embed the official Spotify release player with links to Apple Music.
+Official singles live in `js/tracks.json` as a flat array sorted by Spotify play count (most played first). Each tile shows the artist (Benny Black or Hyperdose) with a genre badge. Tracks with verified local masters play from `audio/`; others use Apple Music previews with links to Spotify and Apple Music.
+
+Deep link: `#music` or `#stream` for the unified grid.
 
 ## License
 
