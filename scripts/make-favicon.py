@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw
+from PIL import Image
 import base64
 import io
 from pathlib import Path
@@ -6,17 +6,14 @@ from pathlib import Path
 SRC = Path(
     r"C:\Users\Benjamin\.cursor\projects\c-Users-Benjamin-Projects-Strewn-release\assets"
     r"\c__Users_Benjamin_AppData_Roaming_Cursor_User_workspaceStorage_empty-window_images"
-    r"_bennyblacklogo-764478b4-8370-4a60-b38c-086a7af4eac2.png"
+    r"_348906517_589248356673731_2200711262366015141_n-dbebc087-849e-4ff6-a834-d0f8e97f19f3.png"
 )
 OUT = Path(r"C:\Users\Benjamin\Projects\Strewn\release\benny-black\assets\favicon.svg")
 
-img = Image.open(SRC).convert("RGBA")
+img = Image.open(SRC).convert("RGB")
 w, h = img.size
 s = min(w, h)
 img = img.crop(((w - s) // 2, (h - s) // 2, (w + s) // 2, (h + s) // 2))
-mask = Image.new("L", (s, s), 0)
-ImageDraw.Draw(mask).ellipse((0, 0, s, s), fill=255)
-img.putalpha(mask)
 small = img.resize((64, 64), Image.LANCZOS)
 buf = io.BytesIO()
 small.save(buf, format="PNG")
