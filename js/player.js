@@ -58,6 +58,9 @@ function buildStreamLinks(track) {
   if (appleUrl) {
     links.push(`<a href="${appleUrl}" target="_blank" rel="noopener">Apple Music</a>`);
   }
+  if (artist.amazon) {
+    links.push(`<a href="${artist.amazon}" target="_blank" rel="noopener">Amazon Music</a>`);
+  }
   return links.join(' · ');
 }
 

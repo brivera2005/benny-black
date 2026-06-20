@@ -7,7 +7,9 @@
       "theme": "country",
       "genre": "Country",
       "spotify": "https://open.spotify.com/artist/1c1hTzDzXmrt5ewbj3ytCo",
-      "apple": "https://music.apple.com/gh/artist/benny-black/1625366432"
+      "apple": "https://music.apple.com/us/artist/benny-black/1625366432",
+      "amazon": "https://music.amazon.com/search/Benny+Black",
+      "youtube": "https://www.youtube.com/@bennyblackofficial/releases"
     },
     "hyperdose": {
       "name": "Hyperdose",
