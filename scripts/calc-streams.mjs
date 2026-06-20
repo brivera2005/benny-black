@@ -28,7 +28,7 @@ function estimateStreams(spotifyPlays) {
 
 const data = JSON.parse(readFileSync(tracksPath, 'utf8'));
 
-data.description = '16 official singles — Benny Black country & Hyperdose rock — sorted by combined streams.';
+data.description = '16 official singles: Benny Black country & Hyperdose rock, sorted by combined streams.';
 data.streamFormula = 'combinedStreams = max(1000, round(spotifyPlays × 1.8 × 1.2))';
 
 data.tracks = data.tracks.map((track) => {

@@ -1,4 +1,4 @@
-# Benny Black — batch mastering enhancement (ffmpeg)
+# Benny Black: batch mastering enhancement (ffmpeg)
 # Usage: .\enhance-masters.ps1 -InputDir "path\to\sources" -OutputDir "path\to\enhanced"
 
 param(

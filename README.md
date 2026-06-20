@@ -1,4 +1,4 @@
-# Benny Black — Official Artist Site
+# Benny Black: Official Artist Site
 
 Modern pop country meets active hard rock. Static site with a custom player for official singles.
 
@@ -14,7 +14,7 @@ Open `http://localhost:8080` (or the port shown).
 
 ## Deploy to Cloudflare Pages
 
-### Option A — Wrangler CLI (direct upload)
+### Option A: Wrangler CLI (direct upload)
 
 ```bash
 npm install -g wrangler   # or use npx wrangler
@@ -22,7 +22,7 @@ wrangler login
 npx wrangler pages deploy . --project-name=bennyblack --branch=main
 ```
 
-### Option B — GitHub integration
+### Option B: GitHub integration
 
 1. Push this folder to `github.com/brivera2005/benny-black`
 2. In Cloudflare Dashboard → Workers & Pages → Create → Connect to Git
