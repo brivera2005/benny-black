@@ -1,0 +1,67 @@
+[
+  {
+    "id": "downtown",
+    "title": "Downtown",
+    "file": "audio/downtown.mp3",
+    "year": "2022",
+    "type": "Single",
+    "color": "#d4a853"
+  },
+  {
+    "id": "whos-comin-with-me",
+    "title": "Who's Comin' with Me?",
+    "file": "audio/whos-comin-with-me.mp3",
+    "year": "2022",
+    "type": "Single",
+    "color": "#c45c26"
+  },
+  {
+    "id": "youre-my-summertime",
+    "title": "You're My Summertime",
+    "file": "audio/youre-my-summertime.mp3",
+    "year": "2023",
+    "type": "Single",
+    "color": "#f59e0b"
+  },
+  {
+    "id": "my-rearview-mirror",
+    "title": "My Rearview Mirror (Is My Backyard)",
+    "file": "audio/my-rearview-mirror.mp3",
+    "year": "2023",
+    "type": "Single",
+    "color": "#22c55e"
+  },
+  {
+    "id": "forever-after",
+    "title": "Forever After",
+    "file": "audio/forever-after.mp3",
+    "year": "2023",
+    "type": "Single",
+    "color": "#ec4899"
+  },
+  {
+    "id": "what-ifs",
+    "title": "What Ifs",
+    "file": "audio/what-ifs.mp3",
+    "year": "2023",
+    "type": "Single",
+    "color": "#8b5cf6"
+  },
+  {
+    "id": "bulletproof",
+    "title": "Bulletproof",
+    "file": "audio/bulletproof.mp3",
+    "year": "2023",
+    "type": "Single",
+    "feat": "bEN & sEAN",
+    "color": "#ef4444"
+  },
+  {
+    "id": "preacher-man",
+    "title": "Preacher Man",
+    "file": "audio/preacher-man.mp3",
+    "year": "2024",
+    "type": "Single",
+    "color": "#14b8a6"
+  }
+]
