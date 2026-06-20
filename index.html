@@ -42,16 +42,16 @@
   <main id="top">
     <section class="hero" id="music">
       <div class="hero__intro">
-        <p class="hero__eyebrow">Independent Artist · 16 Tracks · <span id="catalogStreams">3.9M+ combined streams</span></p>
+        <ul class="hero__stats" aria-label="Catalog overview">
+          <li class="hero__stat hero__stat--label">Independent Artist</li>
+          <li class="hero__stat">16 Tracks</li>
+          <li class="hero__stat hero__stat--streams" id="catalogStreams">3.9M+ combined streams</li>
+        </ul>
         <h1 class="hero__title">
           <span class="hero__title-main">Benny</span>
           <span class="hero__title-accent">Black</span>
         </h1>
         <p class="hero__tagline">Country grit. Rock voltage. One catalog, sorted by most streamed.</p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="#stream">Stream Everything</a>
-          <a class="btn btn--ghost" href="https://open.spotify.com/artist/1c1hTzDzXmrt5ewbj3ytCo" target="_blank" rel="noopener">Spotify</a>
-        </div>
       </div>
 
       <div class="player" id="player">
@@ -66,9 +66,15 @@
               <button type="button" class="sort-toggle__btn" data-sort="date" aria-pressed="false">Newest</button>
             </div>
             <div class="stream-header__links">
-              <a href="https://open.spotify.com/artist/1c1hTzDzXmrt5ewbj3ytCo" target="_blank" rel="noopener">Benny Black</a>
+              <a class="platform-link" href="https://open.spotify.com/artist/1c1hTzDzXmrt5ewbj3ytCo" target="_blank" rel="noopener">
+                <img class="platform-link__icon" src="assets/logos/spotify.svg" alt="" width="14" height="14">
+                Benny Black
+              </a>
               <span aria-hidden="true">·</span>
-              <a href="https://open.spotify.com/artist/3v3zJzqzBPu0nkLRCdB3kJ" target="_blank" rel="noopener">Hyperdose</a>
+              <a class="platform-link" href="https://open.spotify.com/artist/3v3zJzqzBPu0nkLRCdB3kJ" target="_blank" rel="noopener">
+                <img class="platform-link__icon" src="assets/logos/spotify.svg" alt="" width="14" height="14">
+                Hyperdose
+              </a>
             </div>
           </div>
         </header>
@@ -130,23 +136,33 @@
       </div>
       <div class="links">
         <a class="link-card" href="https://open.spotify.com/artist/1c1hTzDzXmrt5ewbj3ytCo" target="_blank" rel="noopener">
-          <span class="link-card__icon link-card__icon--spotify">♫</span>
+          <span class="link-card__icon link-card__icon--spotify">
+            <img src="assets/logos/spotify.svg" alt="" width="28" height="28">
+          </span>
           <span class="link-card__name">Spotify</span>
         </a>
         <a class="link-card" href="https://music.apple.com/us/artist/benny-black/1625366432" target="_blank" rel="noopener">
-          <span class="link-card__icon link-card__icon--apple">♪</span>
+          <span class="link-card__icon link-card__icon--apple">
+            <img src="assets/logos/apple-music.svg" alt="" width="28" height="28">
+          </span>
           <span class="link-card__name">Apple Music</span>
         </a>
         <a class="link-card" href="https://music.amazon.com/search/Benny+Black" target="_blank" rel="noopener">
-          <span class="link-card__icon link-card__icon--amazon">a</span>
+          <span class="link-card__icon link-card__icon--amazon">
+            <img src="assets/logos/amazon-music.svg" alt="" width="28" height="28">
+          </span>
           <span class="link-card__name">Amazon Music</span>
         </a>
         <a class="link-card" href="https://www.youtube.com/@bennyblackofficial/releases" target="_blank" rel="noopener">
-          <span class="link-card__icon link-card__icon--youtube">▶</span>
+          <span class="link-card__icon link-card__icon--youtube">
+            <img src="assets/logos/youtube.svg" alt="" width="28" height="28">
+          </span>
           <span class="link-card__name">YouTube</span>
         </a>
         <a class="link-card" href="https://github.com/brivera2005" target="_blank" rel="noopener">
-          <span class="link-card__icon link-card__icon--github">{ }</span>
+          <span class="link-card__icon link-card__icon--github">
+            <img src="assets/logos/github.svg" alt="" width="28" height="28">
+          </span>
           <span class="link-card__name">GitHub</span>
         </a>
       </div>

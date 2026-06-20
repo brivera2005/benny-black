@@ -11,6 +11,20 @@ const timeTotal = document.getElementById('timeTotal');
 const ICON_PLAY = '<svg class="track-tile__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7L8 5z"/></svg>';
 const ICON_PAUSE = '<svg class="track-tile__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z"/></svg>';
 
+const PLATFORM_LOGOS = {
+  spotify: 'assets/logos/spotify.svg',
+  apple: 'assets/logos/apple-music.svg',
+  amazon: 'assets/logos/amazon-music-icon.svg',
+};
+
+function platformLink(href, label, logoKey) {
+  const logo = PLATFORM_LOGOS[logoKey];
+  const icon = logo
+    ? `<img class="platform-link__icon" src="${logo}" alt="" width="14" height="14">`
+    : '';
+  return `<a class="platform-link" href="${href}" target="_blank" rel="noopener">${icon}<span>${label}</span></a>`;
+}
+
 let artists = {};
 let rawTracks = [];
 let tracks = [];
@@ -53,13 +67,13 @@ function appleMusicUrl(track) {
 function buildStreamLinks(track) {
   const artist = track.artist;
   const links = [];
-  links.push(`<a href="${artist.spotify}" target="_blank" rel="noopener">Spotify</a>`);
+  links.push(platformLink(artist.spotify, 'Spotify', 'spotify'));
   const appleUrl = appleMusicUrl(track) || artist.apple;
   if (appleUrl) {
-    links.push(`<a href="${appleUrl}" target="_blank" rel="noopener">Apple Music</a>`);
+    links.push(platformLink(appleUrl, 'Apple Music', 'apple'));
   }
   if (artist.amazon) {
-    links.push(`<a href="${artist.amazon}" target="_blank" rel="noopener">Amazon Music</a>`);
+    links.push(platformLink(artist.amazon, 'Amazon Music', 'amazon'));
   }
   return links.join(' · ');
 }
@@ -109,26 +123,12 @@ function updateDock(track) {
   playerDock.dataset.theme = track.artist.theme;
 }
 
-async function resolveAudioSrc(track) {
-  if (track.file) {
-    const probe = new Audio();
-    probe.preload = 'metadata';
-    const loaded = await new Promise((resolve) => {
-      probe.addEventListener('loadedmetadata', () => resolve(true), { once: true });
-      probe.addEventListener('error', () => resolve(false), { once: true });
-      probe.src = track.file;
-    });
-    if (loaded) return track.file;
-  }
-  return track.previewUrl;
-}
-
 async function loadTrack(index, autoplay = false) {
   if (index < 0 || index >= tracks.length) return;
 
   currentIndex = index;
   const track = tracks[index];
-  const src = await resolveAudioSrc(track);
+  const src = track.previewUrl;
 
   if (!src) return;
 
