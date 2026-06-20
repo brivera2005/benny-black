@@ -3,65 +3,62 @@
     "id": "downtown",
     "title": "Downtown",
     "file": "audio/downtown.mp3",
+    "spotify": "3ctsgN5vXRzOJnZIpGDPhA",
+    "apple": "https://music.apple.com/us/album/downtown/1625367142?i=1625367144",
     "year": "2022",
     "type": "Single",
+    "duration": 183,
     "color": "#d4a853"
   },
   {
     "id": "whos-comin-with-me",
     "title": "Who's Comin' with Me?",
-    "file": "audio/whos-comin-with-me.mp3",
+    "spotify": "5NOU8tm2cDzxXSU2PCv9Ex",
+    "apple": "https://music.apple.com/us/album/whos-comin-with-me/1650634028?i=1650634029",
     "year": "2022",
     "type": "Single",
+    "duration": 212,
     "color": "#c45c26"
   },
   {
     "id": "youre-my-summertime",
     "title": "You're My Summertime",
-    "file": "audio/youre-my-summertime.mp3",
+    "spotify": "6PTKLdrqA4VDT2Nqy7fnqQ",
+    "apple": "https://music.apple.com/us/album/youre-my-summertime-feat-nikki-simmons/1698247490?i=1698247491",
     "year": "2023",
     "type": "Single",
+    "feat": "Nikki Simmons",
+    "duration": 191,
     "color": "#f59e0b"
   },
   {
     "id": "my-rearview-mirror",
     "title": "My Rearview Mirror (Is My Backyard)",
-    "file": "audio/my-rearview-mirror.mp3",
+    "spotify": "0vgGTblXebxzVntc4gmoXp",
+    "apple": "https://music.apple.com/us/album/my-rearview-mirror-is-my-backyard/1705084371?i=1705084372",
     "year": "2023",
     "type": "Single",
+    "duration": 215,
     "color": "#22c55e"
   },
   {
-    "id": "forever-after",
-    "title": "Forever After",
-    "file": "audio/forever-after.mp3",
-    "year": "2023",
+    "id": "keep",
+    "title": "Keep",
+    "spotify": "4sUJ71HNnuODZabFDJ5YTd",
+    "apple": "https://music.apple.com/us/album/keep/1786812155?i=1786812156",
+    "year": "2024",
     "type": "Single",
-    "color": "#ec4899"
-  },
-  {
-    "id": "what-ifs",
-    "title": "What Ifs",
-    "file": "audio/what-ifs.mp3",
-    "year": "2023",
-    "type": "Single",
+    "duration": 155,
     "color": "#8b5cf6"
   },
   {
-    "id": "bulletproof",
-    "title": "Bulletproof",
-    "file": "audio/bulletproof.mp3",
-    "year": "2023",
-    "type": "Single",
-    "feat": "bEN & sEAN",
-    "color": "#ef4444"
-  },
-  {
-    "id": "preacher-man",
-    "title": "Preacher Man",
-    "file": "audio/preacher-man.mp3",
+    "id": "go-ahead",
+    "title": "Go Ahead",
+    "spotify": "44A6XQ04DqJOw4nzauCnrf",
+    "apple": "https://music.apple.com/us/album/go-ahead/1757829305?i=1757829307",
     "year": "2024",
     "type": "Single",
-    "color": "#14b8a6"
+    "duration": 119,
+    "color": "#ef4444"
   }
 ]

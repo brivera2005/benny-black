@@ -1,6 +1,6 @@
 # Benny Black — Official Artist Site
 
-Modern pop country meets active hard rock. Static site with embedded streamable player for all tracks.
+Modern pop country meets active hard rock. Static site with a custom player for official singles.
 
 ## Local preview
 
@@ -32,7 +32,7 @@ Custom domain (optional): add `bennyblack.com` or `music.bennyblack.com` in Page
 
 ## Tracks
 
-Audio files live in `audio/`. Update `js/tracks.json` when adding new releases.
+Official singles are listed in `js/tracks.json`. Tracks with verified local masters play from `audio/`; others embed the official Spotify release player with links to Apple Music.
 
 ## License
 

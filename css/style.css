@@ -355,6 +355,35 @@ ol { list-style: none; margin: 0; padding: 0; }
   margin: 0.25rem 0 0;
 }
 
+.player__links {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+}
+
+.player__links a {
+  color: var(--teal);
+  transition: color 0.2s;
+}
+
+.player__links a:hover {
+  color: var(--gold);
+}
+
+.player__embed {
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #000;
+}
+
+.player__embed iframe {
+  display: block;
+  width: 100%;
+  min-height: 152px;
+}
+
 .player__controls {
   display: flex;
   align-items: center;

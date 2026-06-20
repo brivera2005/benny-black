@@ -3,6 +3,7 @@ const tracklistEl = document.getElementById('tracklist');
 const playerTitle = document.getElementById('playerTitle');
 const playerSub = document.getElementById('playerSub');
 const playerArt = document.getElementById('playerArt');
+const playerEmbed = document.getElementById('playerEmbed');
 const btnPlay = document.getElementById('btnPlay');
 const btnPrev = document.getElementById('btnPrev');
 const btnNext = document.getElementById('btnNext');
@@ -14,10 +15,11 @@ const timeTotal = document.getElementById('timeTotal');
 const volumeSlider = document.getElementById('volumeSlider');
 const iconPlay = btnPlay.querySelector('.icon-play');
 const iconPause = btnPlay.querySelector('.icon-pause');
+const nativeControls = document.querySelectorAll('.player__controls, .player__progress, .player__volume');
 
 let tracks = [];
 let currentIndex = -1;
-let durations = {};
+let embedMode = false;
 
 function formatTime(seconds) {
   if (!Number.isFinite(seconds)) return '0:00';
@@ -54,31 +56,6 @@ function highlightTrack(index) {
   });
 }
 
-function loadTrack(index, autoplay = false) {
-  if (index < 0 || index >= tracks.length) return;
-
-  currentIndex = index;
-  const track = tracks[index];
-
-  audio.src = track.file;
-  audio.load();
-
-  playerTitle.textContent = track.title;
-  playerSub.textContent = track.feat ? `Benny Black feat. ${track.feat}` : 'Benny Black';
-  playerArt.style.background = `linear-gradient(135deg, ${track.color}, ${adjustColor(track.color, -30)})`;
-
-  const letter = track.title.replace(/[^a-zA-Z]/g, '').slice(0, 2).toUpperCase() || 'BB';
-  playerArt.querySelector('.player__art-letter').textContent = letter;
-
-  highlightTrack(index);
-  updateNavButtons();
-  setPlayingUI(false);
-
-  if (autoplay) {
-    audio.play().then(() => setPlayingUI(true)).catch(() => setPlayingUI(false));
-  }
-}
-
 function adjustColor(hex, amount) {
   const num = parseInt(hex.replace('#', ''), 16);
   const r = Math.min(255, Math.max(0, (num >> 16) + amount));
@@ -87,7 +64,87 @@ function adjustColor(hex, amount) {
   return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
 }
 
+function buildStreamLinks(track) {
+  const links = [];
+  if (track.spotify) {
+    links.push(`<a href="https://open.spotify.com/track/${track.spotify}" target="_blank" rel="noopener">Spotify</a>`);
+  }
+  if (track.apple) {
+    links.push(`<a href="${track.apple}" target="_blank" rel="noopener">Apple Music</a>`);
+  }
+  return links.join(' · ');
+}
+
+function setEmbedMode(active) {
+  embedMode = active;
+  nativeControls.forEach((el) => {
+    el.hidden = active;
+  });
+  playerEmbed.hidden = !active;
+  if (!active) {
+    playerEmbed.innerHTML = '';
+  }
+}
+
+function showSpotifyEmbed(track) {
+  setEmbedMode(true);
+  playerEmbed.innerHTML = `
+    <iframe
+      title="Spotify player for ${track.title}"
+      src="https://open.spotify.com/embed/track/${track.spotify}?utm_source=generator&theme=0"
+      width="100%"
+      height="152"
+      frameborder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"
+      allowfullscreen
+    ></iframe>
+  `;
+  audio.pause();
+  audio.removeAttribute('src');
+  setPlayingUI(false);
+  timeCurrent.textContent = '0:00';
+  timeTotal.textContent = formatTime(track.duration);
+}
+
+function loadTrack(index, autoplay = false) {
+  if (index < 0 || index >= tracks.length) return;
+
+  currentIndex = index;
+  const track = tracks[index];
+
+  playerTitle.textContent = track.title;
+  playerSub.innerHTML = track.feat
+    ? `Benny Black feat. ${track.feat}<br><span class="player__links">${buildStreamLinks(track)}</span>`
+    : `<span class="player__links">${buildStreamLinks(track)}</span>`;
+  playerArt.style.background = `linear-gradient(135deg, ${track.color}, ${adjustColor(track.color, -30)})`;
+
+  const letter = track.title.replace(/[^a-zA-Z]/g, '').slice(0, 2).toUpperCase() || 'BB';
+  playerArt.querySelector('.player__art-letter').textContent = letter;
+
+  highlightTrack(index);
+  updateNavButtons();
+
+  if (track.file) {
+    setEmbedMode(false);
+    audio.src = track.file;
+    audio.load();
+    setPlayingUI(false);
+    if (autoplay) {
+      audio.play().then(() => setPlayingUI(true)).catch(() => setPlayingUI(false));
+    }
+  } else if (track.spotify) {
+    showSpotifyEmbed(track);
+  }
+
+  const durationEl = tracklistEl.querySelector(`[data-track="${track.id}"]`);
+  if (durationEl && track.duration) {
+    durationEl.textContent = formatTime(track.duration);
+  }
+}
+
 function seekTo(clientX) {
+  if (embedMode) return;
   const rect = progressBar.getBoundingClientRect();
   const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
   if (audio.duration) {
@@ -105,20 +162,20 @@ function buildTracklist() {
         ${track.feat ? `<p class="tracklist__feat">feat. ${track.feat}</p>` : ''}
       </div>
       <span class="tracklist__year">${track.year}</span>
-      <span class="tracklist__duration" data-track="${track.id}">—:——</span>
+      <span class="tracklist__duration" data-track="${track.id}">${track.duration ? formatTime(track.duration) : '—:——'}</span>
     </li>
   `).join('');
 
   tracklistEl.querySelectorAll('.tracklist__item').forEach((item) => {
     const index = Number(item.dataset.index);
     item.addEventListener('click', () => {
-      if (currentIndex === index && !audio.paused) {
+      if (currentIndex === index && !embedMode && !audio.paused) {
         audio.pause();
         setPlayingUI(false);
-      } else if (currentIndex === index) {
+      } else if (currentIndex === index && !embedMode) {
         audio.play().then(() => setPlayingUI(true));
       } else {
-        loadTrack(index, true);
+        loadTrack(index, Boolean(tracks[index].file));
       }
     });
     item.addEventListener('keydown', (e) => {
@@ -132,11 +189,13 @@ function buildTracklist() {
 
 async function preloadDurations() {
   for (const track of tracks) {
+    if (track.duration) continue;
+    if (!track.file) continue;
+
     const temp = new Audio(track.file);
     temp.preload = 'metadata';
     await new Promise((resolve) => {
       temp.addEventListener('loadedmetadata', () => {
-        durations[track.id] = temp.duration;
         const el = tracklistEl.querySelector(`[data-track="${track.id}"]`);
         if (el) el.textContent = formatTime(temp.duration);
         resolve();
@@ -148,7 +207,11 @@ async function preloadDurations() {
 
 btnPlay.addEventListener('click', () => {
   if (currentIndex === -1 && tracks.length) {
-    loadTrack(0, true);
+    loadTrack(0, Boolean(tracks[0].file));
+    return;
+  }
+  if (embedMode) {
+    loadTrack(currentIndex, false);
     return;
   }
   if (audio.paused) {
@@ -159,15 +222,22 @@ btnPlay.addEventListener('click', () => {
   }
 });
 
-btnPrev.addEventListener('click', () => loadTrack(currentIndex - 1, true));
-btnNext.addEventListener('click', () => loadTrack(currentIndex + 1, true));
+btnPrev.addEventListener('click', () => {
+  const prev = tracks[currentIndex - 1];
+  loadTrack(currentIndex - 1, Boolean(prev?.file));
+});
+btnNext.addEventListener('click', () => {
+  const next = tracks[currentIndex + 1];
+  loadTrack(currentIndex + 1, Boolean(next?.file));
+});
 
 audio.addEventListener('timeupdate', updateProgress);
 audio.addEventListener('loadedmetadata', updateProgress);
 
 audio.addEventListener('ended', () => {
   if (currentIndex < tracks.length - 1) {
-    loadTrack(currentIndex + 1, true);
+    const next = tracks[currentIndex + 1];
+    loadTrack(currentIndex + 1, Boolean(next?.file));
   } else {
     setPlayingUI(false);
   }
@@ -175,7 +245,7 @@ audio.addEventListener('ended', () => {
 
 progressBar.addEventListener('click', (e) => seekTo(e.clientX));
 progressBar.addEventListener('keydown', (e) => {
-  if (!audio.duration) return;
+  if (embedMode || !audio.duration) return;
   const step = 5;
   if (e.key === 'ArrowRight') audio.currentTime = Math.min(audio.duration, audio.currentTime + step);
   if (e.key === 'ArrowLeft') audio.currentTime = Math.max(0, audio.currentTime - step);
